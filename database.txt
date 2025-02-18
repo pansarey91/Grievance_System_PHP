@@ -1,0 +1,59 @@
+DROP DATABASE IF EXISTS complaint_sys;
+CREATE DATABASE complaint_sys;
+
+USE complaint_sys;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,       -- Unique identifier for each user
+    fullname VARCHAR(100) NOT NULL,          -- User's full name
+    class VARCHAR(50) NOT NULL ,    -- Class
+    email VARCHAR(100) NOT NULL UNIQUE,      -- Email (unique)
+    password_hash VARCHAR(255) NOT NULL,     -- Hashed password for security
+    account_type ENUM('admin', 'student') NOT NULL, -- Account type: Admin or Student
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp of account creation
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE complaints (
+    id INT AUTO_INCREMENT PRIMARY KEY,                    -- Unique complaint ID
+    user_id INT NOT NULL,                                 -- User who submitted the complaint
+    complaint ENUM('hostel', 'food', 'library') NOT NULL, -- Complaint type
+    description TEXT NOT NULL,                            -- Complaint description
+    status ENUM('Pending', 'In Progress', 'Resolved') DEFAULT 'Pending', -- Complaint status
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,       -- Submission time
+    FOREIGN KEY (user_id) REFERENCES users(id),            -- Foreign key linking to users table
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+SELECT * FROM users WHERE email ='sarthip@gmao.com' AND account_type = 'admin';
+SELECT email FROM users WHERE email = 'sarthip@gmao.com'
+
+SELECT c.id, u.fullname, c.complaint, c.description, c.status, c.created_at 
+                      FROM complaints c 
+                      JOIN users u ON c.user_id = u.id
+
+SELECT COUNT(*) AS total FROM complaints
+
+UPDATE complaints SET status = :status WHERE id = :id
+
+SELECT complaint, COUNT(*) AS count FROM complaints GROUP BY complaint
+
+SELECT status, COUNT(*) AS count FROM complaints GROUP BY status
+
+SELECT u.fullname, COUNT(*) AS count 
+                                   FROM complaints c 
+                                   JOIN users u ON c.user_id = u.id 
+                                   GROUP BY c.user_id, u.fullname
+
+SELECT c.id, u.fullname, c.complaint, c.status, c.created_at 
+                                   FROM complaints c 
+                                   JOIN users u ON c.user_id = u.id 
+                                   LIMIT 5
+
+
+
+grievance(g_id, g_name, g_type, g_desc);
+student(s_rno, s_name, s_class,s_div, s_addr, s_phone, s_email, s_password);
+stud_grievance(g_no,s_rno, g_id, faculty_id, g_date, acceptedby);
+faculty(f_id, f_name, f_phone, f_email, f_password);
+grievance_details(sr_no, g_no, g_date, g_status);
