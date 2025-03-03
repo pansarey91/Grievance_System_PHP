@@ -16,6 +16,10 @@ if (isset($_POST['fullname']) && isset($_POST['class']) && isset($_POST['email']
         exit();
     }
 
+    if (strlen($password) < 4) {
+        echo "<script>alert('Password must be at least 4 characters.'); window.location.href = 'signup.html';</script>";
+        exit();
+    }
     // Check if passwords match
     if ($password !== $confirm_password) {
         echo "<script>alert('Passwords do not match.'); window.location.href = 'signup.html';</script>";
