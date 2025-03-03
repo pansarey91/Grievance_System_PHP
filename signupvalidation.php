@@ -12,13 +12,13 @@ if (isset($_POST['fullname']) && isset($_POST['class']) && isset($_POST['email']
 
     // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format.";
+        echo "<script>alert('Invalid email format.'); window.location.href = 'signup.html';</script>";
         exit();
     }
 
     // Check if passwords match
     if ($password !== $confirm_password) {
-        echo "Passwords do not match.";
+        echo "<script>alert('Passwords do not match.'); window.location.href = 'signup.html';</script>";
         exit();
     }
 
@@ -26,7 +26,7 @@ if (isset($_POST['fullname']) && isset($_POST['class']) && isset($_POST['email']
     $stmt = $conn->prepare("SELECT email FROM users WHERE email = :email");
     $stmt->execute(['email' => $email]);
     if ($stmt->rowCount() > 0) {
-        echo "This email is already registered.";
+        echo "<script>alert('Email already registered.'); window.location.href = 'signup.html';</script>";
         exit();
     }
 
@@ -54,10 +54,10 @@ if (isset($_POST['fullname']) && isset($_POST['class']) && isset($_POST['email']
         }
         exit();
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        echo "<script>alert('Database error: " . $e->getMessage() . "'); window.location.href = 'signup.html';</script>";
         exit();
     }
 } else {
-    echo "All fields are required.";
+    echo "<script>alert('All fields are required.'); window.location.href = 'signup.html';</script>";
 }
 ?>

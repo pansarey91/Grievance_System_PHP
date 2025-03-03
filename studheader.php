@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaint System</title>
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +24,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="view_student_complaints.php">View Complaints</a> <!-- New Menu -->
+            </li>
+            <li class="nav-item">
+                <a class="nav-link logout-btn" href="logout.php" style="color: red; font-weight: bold;">Logout</a>
             </li>
         </ul>
 

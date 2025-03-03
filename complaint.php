@@ -73,7 +73,29 @@ session_start();
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
     </style>
+    <script>
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+        }
+    </script>
 </head>
 <body>
     <!-- Include Header -->
@@ -92,7 +114,8 @@ session_start();
             <label for="description">Description:</label>
             <textarea name="description" id="description" rows="4" placeholder="Describe your issue..." required></textarea>
 
-            <input type="submit" value="Submit Complaint">
+            <input type="submit" value="Submit Complaint" onclick="showLoader()">
+            <div id="loader" class="loader" style="display:none;"></div>
         </form>
     </div>
 

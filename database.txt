@@ -25,35 +25,13 @@ CREATE TABLE complaints (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-SELECT * FROM users WHERE email ='sarthip@gmao.com' AND account_type = 'admin';
-SELECT email FROM users WHERE email = 'sarthip@gmao.com'
 
-SELECT c.id, u.fullname, c.complaint, c.description, c.status, c.created_at 
-                      FROM complaints c 
-                      JOIN users u ON c.user_id = u.id
-
-SELECT COUNT(*) AS total FROM complaints
-
-UPDATE complaints SET status = :status WHERE id = :id
-
-SELECT complaint, COUNT(*) AS count FROM complaints GROUP BY complaint
-
-SELECT status, COUNT(*) AS count FROM complaints GROUP BY status
-
-SELECT u.fullname, COUNT(*) AS count 
-                                   FROM complaints c 
-                                   JOIN users u ON c.user_id = u.id 
-                                   GROUP BY c.user_id, u.fullname
-
-SELECT c.id, u.fullname, c.complaint, c.status, c.created_at 
-                                   FROM complaints c 
-                                   JOIN users u ON c.user_id = u.id 
-                                   LIMIT 5
-
-
-
-grievance(g_id, g_name, g_type, g_desc);
-student(s_rno, s_name, s_class,s_div, s_addr, s_phone, s_email, s_password);
-stud_grievance(g_no,s_rno, g_id, faculty_id, g_date, acceptedby);
-faculty(f_id, f_name, f_phone, f_email, f_password);
-grievance_details(sr_no, g_no, g_date, g_status);
+CREATE TABLE email_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    recipient_email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    status ENUM('Sent', 'Failed') NOT NULL,
+    error_message TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

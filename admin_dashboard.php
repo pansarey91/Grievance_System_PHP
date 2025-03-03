@@ -22,15 +22,15 @@
 
         <section class="features">
             <div class="feature">
-                <h2>Hostel Issues</h2>
+            <h2><i class="fas fa-bed"></i> Hostel Issues</h2>
                 <p>Submit complaints about hostel maintenance, cleanliness, and more.</p>
             </div>
             <div class="feature">
-                <h2>Food Services</h2>
+            <h2><i class="fas fa-utensils"></i> Food Services</h2>
                 <p>Share feedback or report issues with the food services provided.</p>
             </div>
             <div class="feature">
-                <h2>Library Services</h2>
+            <h2><i class="fas fa-book"></i> Library Services</h2>
                 <p>Report problems with library facilities or request new resources.</p>
             </div>
         </section>

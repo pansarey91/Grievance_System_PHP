@@ -33,6 +33,7 @@
                 printWindow.document.write('</head><body>');
                 printWindow.document.write('<h2><?= $reportTitle ?></h2>');
                 printWindow.document.write(reportContent);
+                printWindow.document.write('<h6>Generated on: ' + new Date().toLocaleString() + '</h6>')
                 printWindow.document.write('</body></html>');
                 printWindow.document.close();
                 printWindow.print();

@@ -9,10 +9,28 @@ if (!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'admin') {
 }
 
 // Fetch all complaints
-$stmt = $conn->query("SELECT c.id, u.fullname, c.complaint, c.description, c.status, c.created_at , c.updated_at
-                      FROM complaints c 
-                      JOIN users u ON c.user_id = u.id");
-$complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$filter_status = isset($_GET['filter_status']) ? $_GET['filter_status'] : '';
+
+$query = "SELECT c.id, u.fullname, c.complaint, c.description, c.status, c.created_at, c.updated_at 
+          FROM complaints c 
+          JOIN users u ON c.user_id = u.id WHERE 1=1";
+
+$params = [];
+
+if ($search) {
+    $query .= " AND (u.fullname LIKE :search OR c.description LIKE :search)";
+    $params['search'] = "%$search%";
+}
+
+if ($filter_status) {
+    $query .= " AND c.status = :status";
+    $params['status'] = $filter_status;
+}
+
+$stmt = $conn->prepare($query);
+$stmt->execute($params);
+$complaints = $stmt->fetchAll(PDO::FETCH_ASSOC); 
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +124,17 @@ $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'header.php'; ?>
     <h1>Complaint Management</h1>
     <div class="table-container">
+        <form method="GET" action="">
+            <input type="text" style="margin-bottom: 20px; height: 30px" name="search" placeholder="Search complaints..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+            <select name="filter_status" style="margin-bottom: 20px; height: 40px">
+                <option value="">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+            </select>
+            <button type="submit" style="margin-bottom: 20px; height: 40px; margin-left: 10px; width: 8%;">Filter</button>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -127,7 +156,18 @@ $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= $complaint['fullname'] ?></td>
                             <td><?= ucfirst($complaint['complaint']) ?></td>
                             <td><?= $complaint['description'] ?></td>
-                            <td><?= $complaint['status'] ?></td>
+                            <td>
+                                <?php
+                                if ($complaint['status'] === 'Pending') {
+                                    echo '<span class="status-badge pending">Pending</span>';
+                                } elseif ($complaint['status'] === 'In Progress') {
+                                    echo '<span class="status-badge progress">In Progress</span>';
+                                } else {
+                                    echo '<span class="status-badge resolved">Resolved</span>';
+                                }
+                                ?>
+                            </td>
+
                             <td><?= $complaint['created_at'] ?></td>
                             <td><?= $complaint['updated_at'] ?></td>
                             <td>

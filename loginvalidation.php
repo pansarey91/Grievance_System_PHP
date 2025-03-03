@@ -32,13 +32,14 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['login_t
                 }
                 exit();
             } else {
-                echo "Invalid email or password.";
+                echo "<script>alert('Invalid Email or password.'); window.location.href = 'login.html';</script>";
             }
         } else {
-            echo "No account found for the given email and login type.";
+            echo "<script>alert('No account found for the given email and login type.'); window.location.href = 'login.html';</script>";
         }
     } catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage();
+        // echo "Database error: " . $e->getMessage();
+        echo "<script>alert('Database error: " . $e->getMessage() . "'); window.location.href = 'login.html';</script>";
     }
 } else {
     echo "All fields are required.";
