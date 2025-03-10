@@ -30,11 +30,12 @@ if ($filter_status) {
 
 $stmt = $conn->prepare($query);
 $stmt->execute($params);
-$complaints = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+$complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +71,8 @@ $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin-bottom: 20px;
         }
 
-        th, td {
+        th,
+        td {
             text-align: center;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -120,6 +122,7 @@ $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     </style>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
     <h1>Complaint Management</h1>
@@ -192,6 +195,7 @@ $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
-   <?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
+
 </html>

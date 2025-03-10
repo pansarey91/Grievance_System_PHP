@@ -60,6 +60,7 @@ if ($reportType && $startDate && $endDate) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +72,7 @@ if ($reportType && $startDate && $endDate) {
             margin: 0;
             padding: 0;
         }
+
         .container1 {
             width: 90%;
             margin: 20px auto;
@@ -79,90 +81,105 @@ if ($reportType && $startDate && $endDate) {
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         form {
             margin-bottom: 20px;
             text-align: center;
         }
-        select, input, button {
+
+        select,
+        input,
+        button {
             padding: 10px;
             margin: 5px;
             font-size: 16px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
+
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
         }
+
         th {
             background-color: #007bff;
             color: white;
         }
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         tr:hover {
             background-color: #f1f1f1;
         }
+
         .no-data {
             text-align: center;
             color: #666;
             padding: 10px;
         }
+
         .print-button {
             margin-top: 20px;
             text-align: center;
         }
     </style>
 </head>
+
 <body>
 
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<div class="container1">
-    <h1>Complaint Reports</h1>
-    <form method="post" action="">
-        <label for="report_type">Choose a Report:</label>
-        <select name="report_type" id="report_type" required>
-            <option value="">-- Select Report --</option>
-            <optgroup label="General Reports">
-                <option value="total_complaints" <?= $reportType === 'total_complaints' ? 'selected' : '' ?>>Total Complaints</option>
-                <option value="complaints_by_type" <?= $reportType === 'complaints_by_type' ? 'selected' : '' ?>>Complaints by Type</option>
-                <option value="complaints_by_status" <?= $reportType === 'complaints_by_status' ? 'selected' : '' ?>>Complaints by Status</option>
-                <option value="complaints_by_user" <?= $reportType === 'complaints_by_user' ? 'selected' : '' ?>>Complaints by User</option>
-                <option value="recent_complaints" <?= $reportType === 'recent_complaints' ? 'selected' : '' ?>>Recent Complaints</option>
-            </optgroup>
-            <optgroup label="Status Reports">
-                <option value="pending_complaints" <?= $reportType === 'pending_complaints' ? 'selected' : '' ?>>Pending Complaints</option>
-                <option value="in_progress_complaints" <?= $reportType === 'in_progress_complaints' ? 'selected' : '' ?>>In Progress Complaints</option>
-                <option value="resolved_complaints" <?= $reportType === 'resolved_complaints' ? 'selected' : '' ?>>Resolved Complaints</option>
-            </optgroup>
-            <optgroup label="Type Reports">
-                <option value="hostel_complaints" <?= $reportType === 'hostel_complaints' ? 'selected' : '' ?>>Hostel Complaints</option>
-                <option value="food_complaints" <?= $reportType === 'food_complaints' ? 'selected' : '' ?>>Food Complaints</option>
-                <option value="library_complaints" <?= $reportType === 'library_complaints' ? 'selected' : '' ?>>Library Complaints</option>
-            </optgroup>
-        </select>
+    <div class="container1">
+        <h1>Complaint Reports</h1>
+        <form method="post" action="">
+            <label for="report_type">Choose a Report:</label>
+            <select name="report_type" id="report_type" required>
+                <option value="">-- Select Report --</option>
+                <optgroup label="General Reports">
+                    <option value="total_complaints" <?= $reportType === 'total_complaints' ? 'selected' : '' ?>>Total Complaints</option>
+                    <option value="complaints_by_type" <?= $reportType === 'complaints_by_type' ? 'selected' : '' ?>>Complaints by Type</option>
+                    <option value="complaints_by_status" <?= $reportType === 'complaints_by_status' ? 'selected' : '' ?>>Complaints by Status</option>
+                    <option value="complaints_by_user" <?= $reportType === 'complaints_by_user' ? 'selected' : '' ?>>Complaints by User</option>
+                    <option value="recent_complaints" <?= $reportType === 'recent_complaints' ? 'selected' : '' ?>>Recent Complaints</option>
+                </optgroup>
+                <optgroup label="Status Reports">
+                    <option value="pending_complaints" <?= $reportType === 'pending_complaints' ? 'selected' : '' ?>>Pending Complaints</option>
+                    <option value="in_progress_complaints" <?= $reportType === 'in_progress_complaints' ? 'selected' : '' ?>>In Progress Complaints</option>
+                    <option value="resolved_complaints" <?= $reportType === 'resolved_complaints' ? 'selected' : '' ?>>Resolved Complaints</option>
+                </optgroup>
+                <optgroup label="Type Reports">
+                    <option value="hostel_complaints" <?= $reportType === 'hostel_complaints' ? 'selected' : '' ?>>Hostel Complaints</option>
+                    <option value="food_complaints" <?= $reportType === 'food_complaints' ? 'selected' : '' ?>>Food Complaints</option>
+                    <option value="library_complaints" <?= $reportType === 'library_complaints' ? 'selected' : '' ?>>Library Complaints</option>
+                </optgroup>
+            </select>
 
-        <label for="start_date">From:</label>
-        <input type="date" name="start_date" id="start_date" value="<?= $startDate ?>" required>
+            <label for="start_date">From:</label>
+            <input type="date" name="start_date" id="start_date" value="<?= $startDate ?>" required>
 
-        <label for="end_date">To:</label>
-        <input type="date" name="end_date" id="end_date" value="<?= $endDate ?>" required>
+            <label for="end_date">To:</label>
+            <input type="date" name="end_date" id="end_date" value="<?= $endDate ?>" required>
 
-        <button type="submit">View Report</button>
-    </form>
+            <button type="submit">View Report</button>
+        </form>
 
-    <?php include 'report_table.php'; ?>
-</div>
-<?php include 'footer.php'; ?>
+        <?php include 'report_table.php'; ?>
+    </div>
+    <?php include 'footer.php'; ?>
 </body>
+
 </html>

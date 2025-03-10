@@ -1,8 +1,10 @@
 <?php
 session_start();
 include 'database.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 require 'vendor/autoload.php';
 
 
@@ -57,4 +59,3 @@ if (isset($_POST['complaint_id']) && isset($_POST['status'])) {
         echo "Error: " . $e->getMessage();
     }
 }
-?>

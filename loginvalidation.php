@@ -44,4 +44,3 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['login_t
 } else {
     echo "All fields are required.";
 }
-?>

@@ -9,7 +9,7 @@
                     <tr>
                         <?php foreach (array_keys($reportData[0]) as $header): ?>
                             <th><?= ucfirst(str_replace('_', ' ', $header)) ?></th>
-                            <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,13 +17,13 @@
                         <tr>
                             <?php foreach ($row as $value): ?>
                                 <td><?= htmlspecialchars($value) ?></td>
-                                <?php endforeach; ?>
-                            </tr>
                             <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-                <button onclick="printReport()" style="margin: 10px 0; padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Print Report</button>
+        <button onclick="printReport()" style="margin: 10px 0; padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Print Report</button>
         <script>
             function printReport() {
                 const reportContent = document.getElementById('reportContent').innerHTML;

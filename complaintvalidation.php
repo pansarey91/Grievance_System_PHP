@@ -1,8 +1,10 @@
 <?php
 session_start();
 include 'database.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 require 'vendor/autoload.php';
 
 if (isset($_POST['complaint']) && isset($_POST['description'])) {
@@ -59,9 +61,7 @@ if (isset($_POST['complaint']) && isset($_POST['description'])) {
         ]);
 
         echo "<script>alert('Complaint submitted successfully! Email log updated.'); window.location.href = 'student_dashboard.php';</script>";
-
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
-?>

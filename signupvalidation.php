@@ -64,4 +64,3 @@ if (isset($_POST['fullname']) && isset($_POST['class']) && isset($_POST['email']
 } else {
     echo "<script>alert('All fields are required.'); window.location.href = 'signup.html';</script>";
 }
-?>

@@ -4,6 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,8 @@ session_start();
             padding: 0;
         }
 
-        header, footer {
+        header,
+        footer {
             /* background-color: #007BFF; */
             color: white;
             text-align: center;
@@ -46,7 +48,8 @@ session_start();
             text-align: left;
         }
 
-        select, textarea {
+        select,
+        textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -85,11 +88,14 @@ session_start();
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-
-
     </style>
     <script>
         function showLoader() {
@@ -97,6 +103,7 @@ session_start();
         }
     </script>
 </head>
+
 <body>
     <!-- Include Header -->
     <?php include 'studheader.php'; ?>
@@ -122,4 +129,5 @@ session_start();
     <!-- Include Footer -->
     <?php include 'studfooter.php'; ?>
 </body>
+
 </html>
