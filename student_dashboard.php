@@ -1,3 +1,14 @@
+<?php 
+session_start(); 
+
+if(!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'student') {
+    echo"<script>alert('You are not logged in as a student.'); window.location.href = 'login.html';</script>";
+    session_unset();
+    session_destroy();
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +27,7 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="hero-section">
-            <h1>📢 College Grievance Redressal System</h1>
+            <h1>🚀 College Grievance Redressal System</h1>
             <p>Your voice matters! Submit and track complaints regarding hostel, food, library, and more.</p>
 
             <a href="complaint.php" class="btn">Submit a Complaint</a>

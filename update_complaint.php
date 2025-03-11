@@ -9,7 +9,9 @@ require 'vendor/autoload.php';
 
 
 if (!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'admin') {
-    header("Location: login.php");
+    echo "<script>alert('You are not logged in as an admin.'); window.location.href = 'login.html';</script>";
+    session_unset();
+    session_destroy();
     exit();
 }
 

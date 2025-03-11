@@ -4,7 +4,9 @@ include 'database.php';
 
 // Check if the student is logged in
 if (!isset($_SESSION['user_id']) || $_SESSION['login_type'] !== 'student') {
-    header("Location: login.html");
+    echo "<script>alert('You are not logged in as a student.'); window.location.href = 'login.html';</script>";
+    session_unset();
+    session_destroy();
     exit();
 }
 

@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php
+ session_start();
+    
+    if(!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'admin') {
+        echo"<script>alert('You are not logged in as an admin.'); window.location.href = 'login.html';</script>";
+        session_unset();
+        session_destroy();
+        exit();
+    }
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 

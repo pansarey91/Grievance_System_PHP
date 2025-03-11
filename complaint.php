@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'student') {
+    echo "<script>alert('You are not logged in as a student.'); window.location.href = 'login.html';</script>";
+    session_unset();
+    session_destroy();
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

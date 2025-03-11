@@ -2,6 +2,14 @@
 session_start();
 include 'database.php';
 
+if(!isset($_SESSION['login_type']) || $_SESSION['login_type'] !== 'admin') {
+    echo"<script>alert('You are not logged in as an admin.'); window.location.href = 'login.html';</script>";
+    session_unset();
+    session_destroy();
+    exit();
+}
+
+
 // Fetch email logs
 $stmt = $conn->query("SELECT * FROM email_logs ORDER BY created_at DESC");
 $email_logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
